@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>網路學系 規設同仁培訓課表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05080f;--bg2:#0a101e;--panel:rgba(16,24,42,.72);--line:rgba(120,180,255,.14);
+  --txt:#dce8ff;--dim:#93a3c4;--accent:#00e5ff;--up:#00e5ff;--tbd:#ffb648;--done:#93a3c4;--r:14px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);overflow-x:hidden;
+  font:16px/1.6 "Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+.grid-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(rgba(0,229,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.025) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 78%);
+  mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 78%)}
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  padding:16px 32px;border-bottom:1px solid var(--line);backdrop-filter:blur(8px);
+  background:linear-gradient(180deg,rgba(8,13,26,.9),rgba(8,13,26,.55))}
+.brand{display:flex;align-items:center;gap:14px}
+.mark{width:40px;height:40px;border-radius:10px;flex:none;position:relative;
+  background:conic-gradient(from 210deg,#00e5ff,#2f7bff,#7c6cff,#00e5ff);
+  box-shadow:0 0 22px rgba(0,229,255,.45)}
+.mark::after{content:"";position:absolute;inset:3px;border-radius:8px;background:var(--bg);
+  background-image:radial-gradient(circle at 30% 30%,rgba(0,229,255,.5),transparent 60%)}
+h1{margin:0;font-size:18px;font-weight:900;letter-spacing:1px;line-height:1.35}
+h1 .en{display:block;font-family:"Rajdhani","Noto Sans TC",sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:4px;color:var(--accent);text-transform:uppercase}
+.nb{display:inline-block}
+main{position:relative;z-index:1;max-width:1360px;margin:0 auto;padding:26px 20px 56px}
+.sub{color:var(--dim);font-size:13.5px;letter-spacing:.5px}
+.filters{background:var(--panel);backdrop-filter:blur(8px);border:1px solid var(--line);
+  border-radius:var(--r);padding:16px 18px}
+input[type=search]{font:inherit;font-size:14px;width:100%;padding:10px 16px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(10,18,34,.8);color:var(--txt);margin-bottom:10px;
+  outline:none;transition:.25s}
+input[type=search]::placeholder{color:#8294b8}
+input[type=search]:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.12)}
+.frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0}
+.frow>span:first-child{font-family:"Rajdhani","Noto Sans TC",sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:3px;color:var(--dim);min-width:3.4em}
+.chip{font:inherit;font-size:13px;letter-spacing:1px;padding:7px 16px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--dim);cursor:pointer;transition:.25s}
+.chip:hover{color:var(--txt);border-color:rgba(120,180,255,.38)}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#03121c;font-weight:700;
+  box-shadow:0 4px 22px rgba(0,229,255,.25)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;box-shadow:0 0 0 5px rgba(0,229,255,.12)}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12.5px;color:var(--dim);letter-spacing:1px;margin:22px 0 12px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:0}
+.dot.up{background:var(--up);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,229,255,.6)}70%{box-shadow:0 0 0 10px rgba(0,229,255,0)}100%{box-shadow:0 0 0 0 rgba(0,229,255,0)}}
+.dot.tbd{background:var(--tbd);box-shadow:0 0 8px rgba(255,182,72,.55)}
+.dot.done{background:transparent;border:1px solid var(--dim)}
+.map{display:grid;grid-template-columns:repeat(var(--n,6),minmax(0,1fr));gap:12px;align-items:start}
+.col{display:flex;flex-direction:column;gap:9px;animation:fadeIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.head{position:relative;overflow:hidden;border:1px solid var(--c);border-radius:12px;
+  padding:16px 10px 14px;text-align:center;color:var(--txt);
+  background:linear-gradient(160deg,var(--g),rgba(11,17,33,.92) 70%)}
+.head::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--c);box-shadow:0 0 14px var(--c)}
+.head b{display:block;font-size:16px;font-weight:900;letter-spacing:1px;line-height:1.35}
+.head small{display:block;margin-top:5px;font-family:"Rajdhani","Noto Sans TC",sans-serif;font-weight:700;
+  font-size:12.5px;letter-spacing:2px;color:var(--c)}
+.c0{--c:#8b7cff;--g:rgba(139,124,255,.18)}
+.c1{--c:#ff7a4d;--g:rgba(255,122,77,.18)}
+.c2{--c:#4da3ff;--g:rgba(77,163,255,.18)}
+.c3{--c:#2fd6a0;--g:rgba(47,214,160,.18)}
+.c4{--c:#ffb648;--g:rgba(255,182,72,.18)}
+.c5{--c:#9aa8c0;--g:rgba(154,168,192,.18)}
+.blk{text-align:left;font:inherit;color:var(--txt);cursor:pointer;background:rgba(14,21,40,.62);
+  border:1px solid var(--line);border-left:3px solid var(--up);border-radius:10px;padding:10px 12px;transition:.22s}
+.blk:hover{background:rgba(255,255,255,.055);border-color:rgba(120,180,255,.3);transform:translateX(4px)}
+.blk.tbd{border-left-color:var(--tbd)}
+.blk.done{border-left-color:var(--done);background:rgba(12,18,34,.5)}
+.blk .t{font-size:14px;font-weight:700;line-height:1.45}
+.blk.done .t{font-weight:500}
+.blk .when{margin-top:3px;font-size:12px;color:var(--dim);letter-spacing:.5px}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:1px;padding:3px 10px;border-radius:999px;
+  margin:2px 5px 2px 0;border:1px solid var(--line);color:var(--dim)}
+.g0{color:#8ec8ff;border-color:rgba(142,200,255,.42);background:rgba(142,200,255,.1)}
+.g1{color:#3ddc84;border-color:rgba(61,220,132,.4);background:rgba(61,220,132,.1)}
+.g2{color:#00e5ff;border-color:rgba(0,229,255,.42);background:rgba(0,229,255,.08)}
+.new{color:#ffd166;border-color:rgba(255,209,102,.46);background:rgba(255,209,102,.1);animation:newpulse 2.2s infinite}
+@keyframes newpulse{50%{box-shadow:0 0 12px rgba(255,209,102,.35)}}
+.empty{color:var(--dim);font-size:13px;letter-spacing:1px;padding:14px 0;text-align:center}
+dialog{border:1px solid var(--line);border-radius:var(--r);padding:0;max-width:780px;
+  width:calc(100% - 32px);background:rgba(10,16,30,.97);color:var(--txt);
+  backdrop-filter:blur(10px);box-shadow:0 18px 60px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(2,5,12,.74)}
+.dlg{padding:22px 26px}
+.dlg h3{margin:0 0 6px;font-size:21px;font-weight:900;letter-spacing:1px}
+.close{float:right;font:inherit;font-size:22px;line-height:1;background:rgba(255,255,255,.03);
+  border:1px solid var(--line);border-radius:8px;color:var(--dim);cursor:pointer;padding:2px 10px;transition:.2s}
+.close:hover{color:var(--accent);border-color:var(--accent)}
+.sec{margin-top:18px}
+.sec h4{margin:0 0 8px;font-size:15px;font-weight:900;letter-spacing:2px;display:flex;align-items:center;gap:12px}
+.sec h4::before{content:"";flex:none;width:20px;height:2px;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.runs{padding-left:1.3em}
+.runs li{margin:3px 0}
+.note{font-size:13px;color:var(--dim)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{text-align:left;padding:8px;border-top:1px solid var(--line);vertical-align:top}
+.tbl th{font-family:"Rajdhani","Noto Sans TC",sans-serif;font-weight:700;font-size:12.5px;
+  letter-spacing:2px;color:var(--dim);white-space:nowrap}
+.wrap{overflow-x:auto}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.btn{display:inline-block;font-size:13.5px;letter-spacing:1px;padding:9px 18px;border-radius:999px;
+  border:1px solid var(--accent);color:var(--accent);text-decoration:none;background:rgba(0,229,255,.07);transition:.25s}
+.btn:hover{background:rgba(0,229,255,.16);box-shadow:0 4px 22px rgba(0,229,255,.22)}
+.btn.off{border-color:var(--line);color:var(--dim);background:rgba(255,255,255,.02)}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;
+  color:var(--dim);letter-spacing:1px}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:rgba(120,180,255,.18);border-radius:5px}
+::-webkit-scrollbar-track{background:transparent}
+@media (max-width:900px){.map{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:860px){header{padding:14px 18px;gap:12px}main{padding:20px 16px 48px}}
+@media (max-width:560px){.map{grid-template-columns:1fr}.dlg{padding:16px}h1{font-size:16px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="grid-overlay" aria-hidden="true"></div>
+<header>
+  <div class="brand">
+    <div class="mark" aria-hidden="true"></div>
+    <div>
+      <h1><span class="en">OSP Training Map</span><span class="nb">中華電信學院</span> <span class="nb">網路學系</span> <span class="nb">規設同仁培訓課表</span></h1>
+    </div>
+  </div>
+</header>
+<main>
+<div class="sub">線路規劃設計課程地圖・點課程看實際規劃的開班時間、課表與講義</div>
+
+<div class="filters" style="margin-top:16px">
+  <label for="q" class="sub" style="display:block;margin-bottom:6px">搜尋班名或班代號</label>
+  <input type="search" id="q" placeholder="例如：ProgeCAD、LD21B">
+  <div class="frow" role="group" aria-label="適用對象"><span>對象</span><span id="who"></span></div>
+</div>
+
+<div class="legend"><span><i class="dot up"></i>預計開班</span><span><i class="dot tbd"></i>月份已排、日期未定</span><span><i class="dot done"></i>今年已開過（可看課表與講義）</span></div>
+<div class="map" id="map"></div>
+
+<footer id="foot"></footer>
+</main>
+
+<dialog id="dlg" aria-labelledby="d-title"><div class="dlg" id="dbody"></div></dialog>
+
+<script>
+const DATA = {"generated": "2026-10-28 16:50", "today": "2026-10-28", "tagGroups": {"對象": ["#規設", "#客網", "#新進人員", "#主管"], "程度": ["#入門", "#進階", "#專業"], "特色": ["#實作", "#軟體操作", "#法規", "#直播"]}, "categories": ["規劃設計", "資訊系統", "施工工法", "法律實務", "專案研討"], "courses": [{"key": "LT208", "code5": "LT208", "title": "LEAMIS操作訓練班", "tags": ["#規設", "#實作", "#軟體操作"], "category": "資訊系統", "order": 13, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LT208P012", "date": "2026-03-18", "month": "", "status": "done"}, {"code": "LT208P013", "date": "", "month": "2027-10", "status": "planned"}], "schedule": null, "scheduleFrom": null}, {"key": "LD361", "code5": "LD361", "title": "彈性工法及微創工法訓練班", "tags": ["#規設"], "category": "施工工法", "order": 16, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LD361P001", "date": "2026-03-20", "month": "", "status": "done"}], "schedule": null, "scheduleFrom": null}, {"key": "LD362", "code5": "LD362", "title": "線路規劃設計法律風險與實務研習班", "tags": ["#規設", "#法規", "#直播"], "category": "法律實務", "order": 19, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LD362P001", "date": "2026-04-10", "month": "", "status": "done"}, {"code": "LD362P002", "date": "", "month": "2027-04", "status": "planned"}], "schedule": null, "scheduleFrom": null}, {"key": "LD21B", "code5": "LD21B", "title": "線路細部設計PROGECAD實作班", "tags": ["#規設", "#實作", "#軟體操作"], "category": "資訊系統", "order": 10, "isNew": true, "goal": "協助學員熟悉 progeCAD 在線路設計實務中的操作邏輯與應用方式，建立從圖資判讀、線路繪製到圖面整理的完整工作流程。", "audience": "", "runs": [{"code": "LD21BP001", "date": "2026-05-14", "month": "", "status": "done"}, {"code": "LD21BP002", "date": "", "month": "2027-08", "status": "planned"}], "schedule": {"lessons": [{"date": "5/14", "time": "9:10–11:00", "name": "progeCAD 管道設計", "teacher": "許福泰"}, {"date": "5/14", "time": "11:10–14:20", "name": "progeCAD 電纜設計", "teacher": "許福泰"}, {"date": "5/14", "time": "14:30–16:20", "name": "progeCAD 光纜設計", "teacher": "許福泰"}], "days": 1, "handout": ""}, "scheduleFrom": {"code": "LD21BP001", "date": "2026-05-14", "current": false}}, {"key": "LT241", "code5": "LT241", "title": "線路工程動支管控訓練班", "tags": ["#規設"], "category": "資訊系統", "order": 15, "isNew": true, "goal": "協助同仁了解如何利用CBMS及CEMIS連動提報電信線路工程案及動支金額管控，並可處理電信線路工程動支金額管控作業。", "audience": "網分及各營運處規設客網負責線路工程資本支出預算管控及工程執行進度管控人員", "runs": [{"code": "LT241P001", "date": "2026-05-07", "month": "", "status": "done"}], "schedule": null, "scheduleFrom": null}, {"key": "LD213", "code5": "LD213", "title": "MSAN大批改接作業流程研習班", "tags": ["#規設", "#直播"], "category": "規劃設計", "order": 8, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LD213P007", "date": "2026-06-23", "month": "", "status": "done"}, {"code": "LD213P008", "date": "", "month": "2027-03", "status": "planned"}], "schedule": {"lessons": [{"date": "6/23", "time": "9:10–10:00", "name": "MSAN大批改接流程作業", "teacher": "何佩娟"}, {"date": "6/23", "time": "10:10–12:00", "name": "MSAN系統架構及應用情境", "teacher": "柯鴻名"}, {"date": "6/23", "time": "13:30–14:20", "name": "MSAN eRAM改接流程規設起案說明", "teacher": "李孟儒"}, {"date": "6/23", "time": "14:30–16:20", "name": "MSAN eRAM 自動化流程", "teacher": "林唯耕"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgAv10Z9HHCvTYeMvibmR5JiAROxpR6_UPTqPqQCrdKFqwo?e=suhvKe"}, "scheduleFrom": {"code": "LD213P007", "date": "2026-06-23", "current": false}}, {"key": "LD11B", "code5": "LD11B", "title": "ProgeCAD新手基礎操作班", "tags": ["#規設", "#客網", "#入門", "#實作", "#軟體操作"], "category": "資訊系統", "order": 9, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LD11BP001", "date": "2026-07-09", "month": "", "status": "done"}, {"code": "LD11BP002", "date": "2026-07-21", "month": "", "status": "done"}, {"code": "LD11BP003", "date": "", "month": "2027-08", "status": "planned"}], "schedule": {"lessons": [{"date": "7/21", "time": "9:10–10:00", "name": "簡介與環境介面設定", "teacher": "柯政諺"}, {"date": "7/21", "time": "10:10–11:00", "name": "基本操作", "teacher": "柯政諺"}, {"date": "7/21", "time": "11:10–12:00", "name": "基礎座標製圖", "teacher": "柯政諺"}, {"date": "7/21", "time": "13:30–14:20", "name": "基礎製圖與修圖", "teacher": "柯政諺"}, {"date": "7/21", "time": "14:30–15:20", "name": "註解", "teacher": "柯政諺"}, {"date": "7/21", "time": "15:30–16:20", "name": "出圖", "teacher": "柯政諺"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgCW-5ObqD8oQ5QJxQj01HGlASsehmta64FWOYivAMVKQpM?e=7MFMh0"}, "scheduleFrom": {"code": "LD11BP002", "date": "2026-07-21", "current": false}}, {"key": "LD223", "code5": "LD223", "title": "光進銅減分析訓練班", "tags": ["#規設", "#直播"], "category": "規劃設計", "order": 7, "isNew": false, "goal": "協助學員瞭解公司光進銅減分析推動策略及目標。並利用機房銅減分析方法增進MSAN改接效率，依據銅減銅退銅拆SOP流程如何作業。", "audience": "網分及各營運處從事光進銅退相關工作之同仁", "runs": [{"code": "LD223P005", "date": "2026-09-16", "month": "", "status": "done"}, {"code": "LD223P006", "date": "", "month": "2027-06", "status": "planned"}], "schedule": {"lessons": [{"date": "9/16", "time": "9:10–10:00", "name": "光進銅減推動策略", "teacher": "蕭勝文"}, {"date": "9/16", "time": "10:10–12:00", "name": "機房銅減分析方法說明", "teacher": "涂哲源"}, {"date": "9/16", "time": "13:30–15:20", "name": "機房銅減分析作業介紹", "teacher": "涂哲源"}, {"date": "9/16", "time": "15:30–16:20", "name": "光進銅減銅退銅拆推動規劃", "teacher": "蕭勝文"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgBvR85klUBKTasQTXH7WfoeAR2qfD-pdrSDJUkpTlFLdcQ?e=MOkvzz"}, "scheduleFrom": {"code": "LD223P005", "date": "2026-09-16", "current": false}}, {"key": "LD297", "code5": "LD297", "title": "線路規劃設計新進人員訓練班", "tags": ["#規設", "#新進人員", "#入門"], "category": "規劃設計", "order": 0, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LD297P002", "date": "2026-08-12", "month": "", "status": "done"}, {"code": "LD297P004", "date": "", "month": "2027-09", "status": "planned"}], "schedule": {"lessons": [{"date": "8/12", "time": "9:10–10:00", "name": "訓練課程說明", "teacher": "李怡菁"}, {"date": "8/12", "time": "10:10–14:20", "name": "通訊系統概要", "teacher": "蕭毅"}, {"date": "8/12", "time": "14:30–16:20", "name": "寬頻接取網路基本概要", "teacher": "陳東役"}, {"date": "8/13", "time": "9:10–16:20", "name": "電信線路工程基本概要", "teacher": "劉時淼"}, {"date": "8/14", "time": "9:10–12:00", "name": "光纜工程基本概要", "teacher": "林進忠"}, {"date": "8/14", "time": "13:30–16:20", "name": "電信土木管道技術概說", "teacher": "陳宏仁"}, {"date": "8/19", "time": "9:10–14:20", "name": "FTTH網路架構及設備器材介紹", "teacher": "王肇宏"}, {"date": "8/19", "time": "14:30–17:20", "name": "各式光纖接續實習", "teacher": "林世雄,史琇瑩"}, {"date": "8/20", "time": "9:10–11:00", "name": "寬頻彙集網路概述", "teacher": "林建男"}, {"date": "8/20", "time": "11:10–12:00", "name": "客戶端網路佈線系統測試實習", "teacher": "陳鴻文,許曜麟,郭亦澄"}, {"date": "8/20", "time": "13:30–16:20", "name": "板一機房現場實習", "teacher": "陳鴻文,劉永皓,賴俊瑋,郭桂汝,陳建宥,許曜麟,郭亦澄"}, {"date": "8/21", "time": "9:10–11:00", "name": "行固網路融合概述", "teacher": "張國煌"}, {"date": "8/21", "time": "11:10–14:20", "name": "xPON網路基本概要", "teacher": "劉邦辰"}, {"date": "8/21", "time": "14:30–16:20", "name": "MSAN網路基本概要", "teacher": "柯鴻名"}, {"date": "8/26", "time": "9:10–10:00", "name": "OSS、BSS系統介紹", "teacher": "司馬佩文"}, {"date": "8/26", "time": "10:10–12:00", "name": "OPTIMA/PAMS系統介紹", "teacher": "劉家燕"}, {"date": "8/26", "time": "13:30–16:20", "name": "CEMIS系統介紹", "teacher": "吳信穎"}, {"date": "8/27", "time": "9:10–11:00", "name": "CHTGIS系統介紹", "teacher": "李嘉訓"}, {"date": "8/27", "time": "11:10–12:00", "name": "線路細部設計作業實務(一)", "teacher": "江家豪"}, {"date": "8/27", "time": "13:30–14:20", "name": "線路細部設計作業實務(二)", "teacher": "郭凱棱"}, {"date": "8/27", "time": "14:30–16:20", "name": "LEAMIS系統介紹", "teacher": "馮成發"}, {"date": "9/8", "time": "9:10–10:00", "name": "高風險作業法規與公司相關規章介紹", "teacher": "凌宗民"}, {"date": "9/8", "time": "10:10–11:00", "name": "職業安全衛生與風險管理", "teacher": "凌宗民"}, {"date": "9/8", "time": "11:10–14:20", "name": "建築物屋內外電信設備設置管理規則與技術規範說明", "teacher": "陳宏仁"}, {"date": "9/8", "time": "14:30–15:20", "name": "考前複習", "teacher": "李怡菁"}, {"date": "9/8", "time": "15:30–16:20", "name": "綜合測驗", "teacher": "李怡菁"}], "days": 9, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgDOvoCb3W0BQ4dIL1EeVcAKAeCgrecsKge8Qp-6NcNIih8?e=bLI71H"}, "scheduleFrom": {"code": "LD297P002", "date": "2026-08-12", "current": false}}, {"key": "LT214", "code5": "LT214", "title": "CEMIS-II設計管理作業實務班", "tags": ["#規設", "#軟體操作"], "category": "資訊系統", "order": 14, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LT214P007", "date": "2026-09-02", "month": "", "status": "done"}, {"code": "LT214P008", "date": "", "month": "2027-06", "status": "planned"}], "schedule": {"lessons": [{"date": "9/2", "time": "9:10–12:00", "name": "CEMIS 工程立案實務流程", "teacher": "陳彥彬"}, {"date": "9/2", "time": "13:30–16:20", "name": "CEMIS細部設計", "teacher": "陳建廷"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgAxrcFXuDEpQYfPODJx3mW3AZIWrXE67Dk_1emRcA41AQE?e=VyBqGA"}, "scheduleFrom": {"code": "LT214P007", "date": "2026-09-02", "current": false}}, {"key": "LF266", "code5": "LF266", "title": "FTTH ODN光纖網路規劃設計基礎班", "tags": ["#規設", "#入門"], "category": "規劃設計", "order": 4, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LF266P037", "date": "2026-10-21", "month": "", "status": "done"}, {"code": "LF266P038", "date": "2027-10-21", "month": "", "status": "planned"}], "schedule": {"lessons": [{"date": "10/21", "time": "9:10–11:00", "name": "FTTH PON 原理及設備介紹", "teacher": "劉邦辰"}, {"date": "10/21", "time": "11:10–12:00", "name": "FTTH ODN網路規劃設計概論", "teacher": "王肇宏"}, {"date": "10/21", "time": "13:30–16:20", "name": "用戶光纜迴路設計ODN摘要", "teacher": "王肇宏"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgDD9i_JD-mER40dfHec8SHhAZILdh4Iz8c4wRxFj676PD8?e=hTxhTq"}, "scheduleFrom": {"code": "LF266P037", "date": "2026-10-21", "current": false}}, {"key": "LD11A", "code5": "LD11A", "title": "電信線路基本設計書規劃及編製", "tags": ["#規設"], "category": "規劃設計", "order": 3, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LD11AP001", "date": "2026-10-29", "month": "", "status": "planned"}], "schedule": {"lessons": [{"date": "10/29", "time": "14:00–16:30", "name": "線路規劃基本設計書編製作業", "teacher": "陳建廷"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgAUVIzTx1z_ToR8fshfwjtSAQMtk3C-3ic7uLliuvA4T4M?e=A0ntet"}, "scheduleFrom": {"code": "LD11AP001", "date": "2026-10-29", "current": true}}, {"key": "LF320", "code5": "LF320", "title": "FTTH ODN規劃設計研習班", "tags": ["#規設"], "category": "規劃設計", "order": 5, "isNew": false, "goal": "協助學員有效利用LEAMIS系統快速完成資源分析及精準規劃建設，並及早因應各項新業務需求，滿足市場寬頻電路需求。", "audience": "網分及各營運處規劃設計人員", "runs": [{"code": "LF320P011", "date": "2026-11-20", "month": "", "status": "planned"}], "schedule": {"lessons": [{"date": "11/20", "time": "9:10–14:20", "name": "FTTH ODN細部設計實務", "teacher": "林進忠"}, {"date": "11/20", "time": "14:30–16:20", "name": "FTTH ODN資料建檔", "teacher": "林進忠"}], "days": 1, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgDVQOBzIIhJTrN_QkGpQJcqAS-eXJ8LUjdEqgUnXcrqQbw?e=4hDdu5"}, "scheduleFrom": {"code": "LF320P011", "date": "2026-11-20", "current": true}}, {"key": "LD360", "code5": "LD360", "title": "電信管理法與建築空間設計規範研習班", "tags": ["#規設", "#法規"], "category": "法律實務", "order": 21, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LD360P001", "date": "2026-11-27", "month": "", "status": "planned"}], "schedule": {"lessons": [{"date": "11/27", "time": "13:30–16:20", "name": "建築物屋內外電信設備設置技術規範", "teacher": "陳宏仁"}], "days": 1, "handout": ""}, "scheduleFrom": {"code": "LD360P001", "date": "2026-11-27", "current": true}}, {"key": "LC247", "code5": "LC247", "title": "CHTGIS 新一代介面暨圖資查詢與編輯作業班", "tags": ["#規設", "#軟體操作"], "category": "資訊系統", "order": 11, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LC247P005", "date": "2026-09-03", "month": "", "status": "done"}, {"code": "LC247P006", "date": "", "month": "2027-07", "status": "planned"}], "schedule": {"lessons": [{"date": "9/3", "time": "9:10–10:00", "name": "ArcMap 10.6簡介與基本操作", "teacher": "蔡憶昇"}, {"date": "9/3", "time": "10:10–11:00", "name": "ArcMap操作環境介紹", "teacher": "蔡憶昇"}, {"date": "9/3", "time": "11:10–15:20", "name": "地圖查詢與選取功能介紹", "teacher": "蔡憶昇"}, {"date": "9/3", "time": "15:30–16:20", "name": "圖層編輯工具及環境介紹", "teacher": "蔡憶昇"}, {"date": "9/4", "time": "9:10–11:00", "name": "地圖輸出教學介紹", "teacher": "蔡憶昇"}, {"date": "9/4", "time": "11:10–16:20", "name": "CHTGIS基本查詢工具", "teacher": "蔡憶昇"}, {"date": "9/15", "time": "9:10–10:00", "name": "CHTGIS協助工具", "teacher": "蔡憶昇"}, {"date": "9/15", "time": "10:10–11:00", "name": "CHTGIS資料編輯工具", "teacher": "蔡憶昇"}, {"date": "9/15", "time": "11:10–16:20", "name": "CHTGIS列印與出圖工具", "teacher": "蔡憶昇"}], "days": 3, "handout": ""}, "scheduleFrom": {"code": "LC247P005", "date": "2026-09-03", "current": false}}, {"key": "LC135", "code5": "LC135", "title": "電信土木管道規劃設計基礎班", "tags": ["#規設", "#客網", "#入門"], "category": "規劃設計", "order": 6, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LC135P001", "date": "2026-10-06", "month": "", "status": "done"}, {"code": "LC135P002", "date": "2027-02-23", "month": "", "status": "planned"}, {"code": "LC135P003", "date": "2027-04-28", "month": "", "status": "planned"}], "schedule": {"lessons": [{"date": "10/6", "time": "9:10–14:20", "name": "線路土木工程概要", "teacher": "張錦楓"}, {"date": "10/6", "time": "14:30–15:20", "name": "電信土木設計規範", "teacher": "張錦楓"}, {"date": "10/6", "time": "15:30–16:20", "name": "水準測量原理", "teacher": "張錦楓"}, {"date": "10/7", "time": "9:10–11:00", "name": "管道縱斷面水準測量實習(外業)", "teacher": "張錦楓,陳宏仁"}, {"date": "10/7", "time": "11:10–14:20", "name": "管道縱斷面水準測量實習(內業)", "teacher": "張錦楓,陳宏仁"}, {"date": "10/7", "time": "14:30–16:20", "name": "電信管道橋梁附掛製圖實習", "teacher": "張錦楓,陳宏仁"}], "days": 2, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgAVUvJEzUM9QoW2v4zWDe1JARbCxhJAuD0HIdJq5x53YPg?e=xexTD1"}, "scheduleFrom": {"code": "LC135P001", "date": "2026-10-06", "current": false}}, {"key": "LD126", "code5": "LD126", "title": "線規人員專業養成訓練班(2天)", "tags": ["#規設", "#進階"], "category": "規劃設計", "order": 1, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "", "date": "2027-09-30", "month": "", "status": "planned"}], "schedule": null, "scheduleFrom": null}, {"key": "LS202", "code5": "LS202", "title": "線路損害賠償法律實務班", "tags": ["#規設", "#客網", "#法規"], "category": "法律實務", "order": 20, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LS202P007", "date": "2026-08-12", "month": "", "status": "done"}], "schedule": {"lessons": [{"date": "8/12", "time": "9:10–11:00", "name": "電信線路遭受損害處理作業", "teacher": "黃偉傑"}, {"date": "8/12", "time": "11:10–16:20", "name": "線路設施遭受損害處理作業與案例說明", "teacher": "黃偉傑"}, {"date": "8/12", "time": "16:30–17:20", "name": "損害賠償課後研討", "teacher": "黃偉傑"}, {"date": "8/13", "time": "9:10–16:20", "name": "線路設施遭受損害處理作業與案例說明", "teacher": "黃偉傑"}, {"date": "8/13", "time": "16:30–17:20", "name": "損害賠償課後研討", "teacher": "黃偉傑"}], "days": 2, "handout": ""}, "scheduleFrom": {"code": "LS202P007", "date": "2026-08-12", "current": false}}, {"key": "LC242", "code5": "LC242", "title": "CHTGIS管理與圖資維運班", "tags": ["#規設", "#軟體操作"], "category": "資訊系統", "order": 12, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LC242P002", "date": "2026-11-02", "month": "", "status": "planned"}], "schedule": {"lessons": [{"date": "11/2", "time": "9:10–16:20", "name": "CHTGIS市街基本圖資建置操作", "teacher": "蔡憶昇"}, {"date": "11/3", "time": "9:10–16:20", "name": "CHTGIS旅遊網圖資建置操作", "teacher": "蔡憶昇"}, {"date": "11/9", "time": "9:10–16:20", "name": "CHTGIS管道圖資建置操作", "teacher": "蔡憶昇"}, {"date": "11/10", "time": "9:10–16:20", "name": "CHTGIS電纜圖資建置操作", "teacher": "蔡憶昇"}, {"date": "11/11", "time": "9:10–16:20", "name": "CHTGIS光纜圖資建置操作", "teacher": "蔡憶昇"}], "days": 5, "handout": "https://cht365-my.sharepoint.com/:f:/g/personal/lolo_cht_com_tw/IgAnxDlqteztTqTG8swTNaK1Accjco5hkpvBP1PxirYqYys?e=VoV1hf"}, "scheduleFrom": {"code": "LC242P002", "date": "2026-11-02", "current": true}}, {"key": "線路規劃設計查修實習班（台中）", "code5": "", "title": "線路規劃設計查修實習班（台中）", "tags": ["#規設", "#實作"], "category": "規劃設計", "order": 2, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "", "date": "", "month": "2027-09", "status": "planned"}], "schedule": null, "scheduleFrom": null}, {"key": "LM101", "code5": "LM101", "title": "立桿施工作業訓練班(規設專班)", "tags": ["#規設", "#客網", "#實作"], "category": "施工工法", "order": 17, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LM101P006", "date": "", "month": "2027-10", "status": "planned"}], "schedule": null, "scheduleFrom": null}, {"key": "LD363", "code5": "LD363", "title": "第一現場_線路規劃設計專案經驗分享班", "tags": ["#規設"], "category": "專案研討", "order": 22, "isNew": true, "goal": "", "audience": "", "runs": [{"code": "LD363P001", "date": "", "month": "2027-05", "status": "planned"}], "schedule": null, "scheduleFrom": null}, {"key": "LM244", "code5": "LM244", "title": "電纜接續技術研習班", "tags": ["#客網", "#實作"], "category": "施工工法", "order": 18, "isNew": false, "goal": "", "audience": "", "runs": [{"code": "LM244P004", "date": "2026-04-16", "month": "", "status": "done"}], "schedule": null, "scheduleFrom": null}]};
+const WD = "日一二三四五六";
+const GROUPS = Object.entries(DATA.tagGroups);
+const groupOf = t => GROUPS.findIndex(([, ts]) => ts.includes(t));
+const on = new Set();
+
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === "class") el.className = v; else if (k.startsWith("on")) el[k] = v; else el.setAttribute(k, v);
+  }
+  for (const k of kids.flat()) if (k != null && k !== "") el.append(k instanceof Node ? k : String(k));
+  return el;
+}
+function roc(iso) {
+  const d = new Date(iso + "T00:00:00");
+  return `${d.getFullYear() - 1911}/${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}（${WD[d.getDay()]}）`;
+}
+function runLabel(r) {
+  if (r.date) return roc(r.date);
+  if (r.month) { const [y, m] = r.month.split("-"); return `${y - 1911} 年 ${+m} 月（日期未定）`; }
+  return "日期未定";
+}
+const nextRun = c => c.runs.find(r => r.status !== "done");
+const lastRun = c => [...c.runs].reverse().find(r => r.status === "done");
+const tagEls = c => [c.isNew ? h("span", { class: "tag new" }, "新開班") : null,
+  ...c.tags.map(t => h("span", { class: "tag g" + Math.max(groupOf(t), 0) }, t))];
+
+function blk(c) {
+  const r = nextRun(c) || lastRun(c);
+  const cls = r.status === "done" ? "done" : r.date ? "up" : "tbd";
+  const when = r.status === "done" ? "已開班・" + runLabel(r) : runLabel(r);
+  return h("button", { class: "blk " + cls, type: "button", onclick: () => openCourse(c.key), "aria-haspopup": "dialog" },
+    h("div", { class: "t" }, c.title), h("div", { class: "when" }, when));
+}
+
+let who = "";
+function matches(c, q) {
+  if (who && !c.tags.includes(who)) return false;
+  if (!q) return true;
+  return (c.title + " " + c.key + " " + c.runs.map(r => r.code).join(" ")).toLowerCase().includes(q);
+}
+
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const list = DATA.courses.filter(c => matches(c, q));
+  const cols = [...DATA.categories, ""].map((cat, i) => {
+    const cs = list.filter(c => c.category === cat).sort((a, b) => a.order - b.order);   // 依 tags.xlsx 的列順序，類似的課排在一起
+    if (!cat && !cs.length) return null;
+    return h("div", { class: "col" },
+      h("div", { class: "head c" + i }, h("b", {}, cat || "其他課程"), h("small", {}, `${cs.length} 門・${cs.filter(nextRun).length} 門將開`)),
+      cs.length ? cs.map(blk) : h("div", { class: "empty" }, "沒有符合的課程"));
+  }).filter(Boolean);
+  const map = document.getElementById("map");
+  map.style.setProperty("--n", cols.length);   // 「其他課程」沒課時不留空欄
+  map.replaceChildren(...cols);
+}
+const sortKey = r => r.date || (r.month ? r.month + "-99" : "9999");
+
+function openCourse(key) {
+  const c = DATA.courses.find(x => x.key === key);
+  if (!c) return;
+  const s = c.schedule, f = c.scheduleFrom;
+  const body = document.getElementById("dbody");
+  body.replaceChildren(...[
+    h("button", { class: "close", type: "button", "aria-label": "關閉", onclick: () => dlg.close() }, "×"),
+    h("h3", { id: "d-title" }, c.title),
+    h("div", { class: "note" }, [c.category || "其他課程", c.code5 ? "課程代號 " + c.code5 : ""].filter(Boolean).join("・")),
+    h("div", { style: "margin-top:8px" }, tagEls(c)),
+    c.goal ? h("div", { class: "sec" }, h("h4", {}, "培訓目標"), h("div", {}, c.goal)) : null,
+    c.audience ? h("div", { class: "sec" }, h("h4", {}, "參訓對象"), h("div", {}, c.audience)) : null,
+    h("div", { class: "sec" }, h("h4", {}, "開班期別"),
+      h("ul", { class: "runs" }, c.runs.map(r => h("li", {}, `${r.code || "（班代號待定）"}　${runLabel(r)}　${r.status === "done" ? "已開班" : "預計開班"}`)))),
+    h("div", { class: "sec" },
+      h("h4", {}, s ? (f.current ? "本期課表" : `課程內容（參考 ${f.code}・${roc(f.date)}）`) : "課程內容"),
+      s ? [h("div", { class: "wrap" }, h("table", { class: "tbl" },
+              h("tr", {}, h("th", {}, "日期"), h("th", {}, "時間"), h("th", {}, "單元"), h("th", {}, "講師")),
+              s.lessons.map(l => h("tr", {}, h("td", {}, l.date), h("td", {}, l.time), h("td", {}, l.name), h("td", {}, l.teacher))))),
+           f.current ? null : h("div", { class: "note", style: "margin-top:6px" }, "※ 這是上一期的內容，本期課表與講師以正式公告為準。")]
+        : h("div", { class: "note" }, "課程內容待公告。")),
+    h("div", { class: "sec btns" },
+      s && s.handout ? h("a", { class: "btn", href: s.handout, target: "_blank", rel: "noopener" }, "📥 學員講義（需公司帳號）") : null,
+      h("span", { class: "btn off" }, "報名開放後會更新")),
+  ].filter(Boolean));
+  if (location.hash !== "#" + key) history.replaceState(null, "", "#" + key);
+  if (!dlg.open) dlg.showModal();
+}
+
+const dlg = document.getElementById("dlg");
+dlg.addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+document.getElementById("who").replaceChildren(...[["", "全部"], ["#規設", "規設"], ["#客網", "客網"]].map(([t, label]) =>
+  h("button", { class: "chip", type: "button", "aria-pressed": String(t === who), onclick: e => {
+    who = t;
+    document.querySelectorAll("#who .chip").forEach(b => b.setAttribute("aria-pressed", String(b === e.currentTarget)));
+    render();
+  } }, label)));
+document.getElementById("q").addEventListener("input", render);
+document.getElementById("foot").textContent = `資料更新：${DATA.generated}・課程規劃以學院正式公告為準・聯絡導師：李怡菁（LOLO）`;
+render();
+if (location.hash.length > 1) openCourse(decodeURIComponent(location.hash.slice(1)));
+</script>
+</body>
+</html>
